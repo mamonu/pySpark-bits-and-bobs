@@ -1,26 +1,6 @@
 # The CAP FAQ
 
-    
-## 0. What is this document?
 
-No subject appears to be more controversial to distributed systems
-engineers than the oft-quoted, oft-misunderstood CAP theorem. The
-purpose of this FAQ is to explain what is known about CAP, so as to
-help those new to the theorem get up to speed quickly, and to settle
-some common misconceptions or points of disagreement.
-
-Of course, there's every possibility I've made superficial or
-completely thorough mistakes here. Corrections and comments are
-welcome: <a href="mailto:vaquar.khan@gmail.com">let me have
-them</a>.
-
-There are some questions I still intend to answer. For example
-
-* *What's the relationship between CAP and performance?*
-* *What does CAP mean to me as an engineer?*
-* *What's the relationship between CAP and ACID?*
-
-Please suggest more.
 
 ## 1. Where did the CAP Theorem come from?
 
