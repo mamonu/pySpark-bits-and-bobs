@@ -1,10 +1,12 @@
 
+RDD/ sometimes Dataframes Tranformations / Actions
+
+
+# Transformations and actions for RDDs (and sometimes Dataframes)
+
+
 ## Transformations
 
-
-
-
-## Transformation
 
 
 Eg - map, filter, flatMap ...
