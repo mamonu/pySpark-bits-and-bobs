@@ -1,7 +1,4 @@
 
-RDD/ sometimes Dataframes Tranformations / Actions
-
-
 # Transformations and actions for RDDs (and sometimes Dataframes)
 
 
