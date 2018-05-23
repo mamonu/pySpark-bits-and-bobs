@@ -1,8 +1,9 @@
 
-# Transformations and actions for RDDs (and sometimes Dataframes)
+# Transformations and actions for RDDs 
+## (and sometimes Dataframes)
 
 
-## Transformations
+### Transformations
 
 
 
@@ -57,7 +58,7 @@ Lazy execution - Delays execution untill finds an 'Action' so that it can prepar
 
 
 
-## Actions
+### Actions
 
 Eg - count, collect, reduce ...Trigger execution of pipeline
 
