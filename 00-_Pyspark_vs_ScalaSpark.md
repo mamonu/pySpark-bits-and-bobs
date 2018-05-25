@@ -1,4 +1,10 @@
 
+# Spark performance for Scala vs Python
+
+
+(Great answer taken from https://stackoverflow.com/questions/32464122/spark-performance-for-scala-vs-python )
+
+
 ## RDD API 
 ### (pure Python structures with JVM based orchestration)
 
