@@ -1,5 +1,6 @@
 
-## RDD API (pure Python structures with JVM based orchestration)
+## RDD API 
+### (pure Python structures with JVM based orchestration)
 
 This is the component which will be most affected by the performance of the Python code and the details of PySpark implementation. While Python performance is rather unlikely to be a problem, there at least few factors you have to consider:
 
@@ -24,8 +25,10 @@ PySpark configuration provides the `spark.python.worker.reuse` option which can 
 
 Reference counting, used as the first line garbage collection method in CPython, works pretty well with typical Spark workloads (stream-like processing, no reference cycles) and reduces the risk of long GC pauses.
 
+--------
 
-## MLlib (mixed Python and JVM execution)
+## MLlib 
+### (mixed Python and JVM execution)
 
 Basic considerations are pretty much the same as before with a few additional issues. 
 While basic structures used with MLlib are plain Python RDD objects, all algorithms are executed directly using Scala.
@@ -34,7 +37,11 @@ increased memory usage and some additional limitations we'll cover later.
 
 As of now (Spark 2.x), the RDD-based API is in a maintenance mode and is scheduled to be removed in Spark 3.0.
 
-## DataFrame API and Spark ML (JVM execution with Python code limited to the driver)
+
+--------
+
+## DataFrame API and Spark ML 
+### (JVM execution with Python code limited to the driver)
 
 These are probably the best choice for standard data processing tasks. 
 
@@ -51,21 +58,24 @@ Also be sure to avoid unnecessary passing data between DataFrames and RDDs. This
 It is worth noting that Py4J calls have pretty high latency. 
 Usually, it shouldn't matter (overhead is constant and doesn't depend on the amount of data) but in the case of soft real-time applications, you may consider caching/reusing Java wrappers.
 
-## GraphX and Spark DataSets
+#### GraphX and Spark DataSets
 
 As for now (Spark 1.6 2.1) neither one provides PySpark API so you can say that PySpark is infinitely worse than Scala.
 
-## GraphX
+#### GraphX
 In practice, GraphX development stopped almost completely and the project is currently in the maintenance mode with related JIRA tickets closed as won't fix. GraphFrames library provides an alternative graph processing library with Python bindings.
 
-## Dataset
+#### Dataset
 Subjectively speaking there is not much place for statically typed Datasets in Python and even if there was the current Scala implementation is too simplistic and doesn't provide the same performance benefits as DataFrame.
 
-## Streaming
+#### Streaming
 
 From what I've seen so far, I would strongly recommend using Scala over Python. It may change in the future if PySpark gets support for structured streams but right now Scala API seems to be much more robust, comprehensive and efficient. My experience is quite limited.
 
 Structured streaming in Spark 2.x seem to reduce the gap between languages but for now it is still in its early days. Nevertheless, RDD based API is already referenced as "legacy streaming" in the Databricks Documentation (date of access 2017-03-03)) so it reasonable to expect further unification efforts.
+
+
+------
 
 ## Non-performance considerations
 
