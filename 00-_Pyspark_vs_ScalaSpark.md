@@ -5,6 +5,12 @@
 (Great answer taken from https://stackoverflow.com/questions/32464122/spark-performance-for-scala-vs-python )
 
 
+
+![pysparkinternals](Pyspark_internals.png)
+
+
+
+
 ## RDD API 
 ### (pure Python structures with JVM based orchestration)
 
