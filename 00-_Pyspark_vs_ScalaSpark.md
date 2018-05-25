@@ -69,19 +69,22 @@ Structured streaming in Spark 2.x seem to reduce the gap between languages but f
 
 ## Non-performance considerations
 
-Feature parity
+#### Feature parity
 
 Not all Spark features are exposed through PySpark API. Be sure to check if the parts you need are already implemented and try to understand possible limitations.
 
 It is particularly important when you use MLlib and similar mixed contexts (see Calling Java/Scala function from a task). To be fair some parts of the PySpark API, like mllib.linalg, provides a more comprehensive set of methods than Scala.
 
-## API design
+#### API design
+
 The PySpark API closely reflects its Scala counterpart and as such is not exactly Pythonic. It means that it is pretty easy to map between languages but at the same time, Python code can be significantly harder to understand.
 
-## Complex architecture
+#### Complex architecture
+
 PySpark data flow is relatively complex compared to pure JVM execution. It is much harder to reason about PySpark programs or debug. Moreover at least basic understanding of Scala and JVM in general is pretty much a must have.
 
-## Spark 2.x and beyond
+#### Spark 2.x and beyond
+
 Ongoing shift towards Dataset API, with frozen RDD API brings both opportunities and challenges for Python users. While high level parts of the API are much easier to expose in Python, the more advanced features are pretty much impossible to be used directly.
 
 Moreover native Python functions continue to be second class citizen in the SQL world. Hopefully this will improve in the future with Apache Arrow serialization (current efforts target data collection but UDF serde is a long term goal).
