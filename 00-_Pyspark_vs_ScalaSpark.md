@@ -3,13 +3,25 @@
 
 This is the component which will be most affected by the performance of the Python code and the details of PySpark implementation. While Python performance is rather unlikely to be a problem, there at least few factors you have to consider:
 
-Overhead of JVM communication. Practically all data that comes to and from Python executor has to be passed through a socket and a JVM worker. While this is a relatively efficient local communication it is still not free.
-Process-based executors (Python) versus thread based (single JVM multiple threads) executors (Scala). Each Python executor runs in its own process. As a side effect, it provides stronger isolation than its JVM counterpart and some control over executor lifecycle but potentially significantly higher memory usage:
-interpreter memory footprint
-footprint of the loaded libraries
-less efficient broadcasting (each process requires its own copy of a broadcast)
-Performance of Python code itself. Generally speaking Scala is faster than Python but it will vary on task to task. Moreover you have multiple options including JITs like Numba, C extensions (Cython) or specialized libraries like Theano. Finally, if you don't use ML / MLlib (or simply NumPy stack), consider using PyPy as an alternative interpreter. See SPARK-3094.
-PySpark configuration provides the spark.python.worker.reuse option which can be used to choose between forking Python process for each task and reusing existing process. The latter option seems to be useful to avoid expensive garbage collection (it is more an impression than a result of systematic tests), while the former one (default) is optimal for in case of expensive broadcasts and imports.
+#### Overhead of JVM communication.
+
+Practically all data that comes to and from Python executor has to be passed through a socket and a JVM worker. While this is a relatively efficient local communication it is still not free.
+
+#### Process-based executors (Python) versus thread based (single JVM multiple threads) executors (Scala). 
+
+Each Python executor runs in its own process. As a side effect, it provides stronger isolation than its JVM counterpart 
+and some control over executor lifecycle but potentially significantly higher memory usage:
+
+* interpreter memory footprint
+* footprint of the loaded libraries
+* less efficient broadcasting (each process requires its own copy of a broadcast)
+
+#### Performance of Python code itself. 
+
+Generally speaking Scala is faster than Python but it will vary on task to task. Moreover you have multiple options including JITs like Numba, C extensions (Cython) or specialized libraries like Theano. Finally, if you don't use ML / MLlib (or simply NumPy stack), consider using PyPy as an alternative interpreter. See SPARK-3094.
+
+PySpark configuration provides the `spark.python.worker.reuse` option which can be used to choose between forking Python process for each task and reusing existing process. The latter option seems to be useful to avoid expensive garbage collection (it is more an impression than a result of systematic tests), while the former one (default) is optimal for in case of expensive broadcasts and imports.
+
 Reference counting, used as the first line garbage collection method in CPython, works pretty well with typical Spark workloads (stream-like processing, no reference cycles) and reduces the risk of long GC pauses.
 
 
@@ -25,17 +37,18 @@ As of now (Spark 2.x), the RDD-based API is in a maintenance mode and is schedul
 ## DataFrame API and Spark ML (JVM execution with Python code limited to the driver)
 
 These are probably the best choice for standard data processing tasks. 
+
 Since Python code is mostly limited to high-level logical operations on the driver, there should be no performance difference between Python and Scala.
 
-A single exception is usage of row-wise Python UDFs which are significantly less efficient than their Scala equivalents. While there is some chance for improvements (there has been substantial development in Spark 2.0.0), the biggest limitation is full roundtrip between internal representation (JVM) and Python interpreter. If possible, you should favor a composition of built-in expressions (example. Python UDF behavior has been improved in Spark 2.0.0, but it is still suboptimal compared to native execution. This may improved in the future with introduction of the vectorized UDFs (SPARK-21190).
+A single exception is usage of row-wise Python UDFs which are significantly less efficient than their Scala equivalents. 
+While there is some chance for improvements (there has been substantial development in Spark 2.0.0), the biggest limitation is full roundtrip between internal representation (JVM) and Python interpreter.
+If possible, you should favor a composition of built-in expressions (example. Python UDF behavior has been improved in Spark 2.0.0, but it is still suboptimal compared to native execution. 
+
+This may improved in the future with introduction of the vectorized UDFs (SPARK-21190).   *See Pandas_UDF*
 
 Also be sure to avoid unnecessary passing data between DataFrames and RDDs. This requires expensive serialization and deserialization, not to mention data transfer to and from Python interpreter.
 
-It is worth noting that Py4J calls have pretty high latency. This includes simple calls like:
-
-from pyspark.sql.functions import col
-
-col("foo")
+It is worth noting that Py4J calls have pretty high latency. 
 Usually, it shouldn't matter (overhead is constant and doesn't depend on the amount of data) but in the case of soft real-time applications, you may consider caching/reusing Java wrappers.
 
 ## GraphX and Spark DataSets
@@ -57,6 +70,7 @@ Structured streaming in Spark 2.x seem to reduce the gap between languages but f
 ## Non-performance considerations
 
 Feature parity
+
 Not all Spark features are exposed through PySpark API. Be sure to check if the parts you need are already implemented and try to understand possible limitations.
 
 It is particularly important when you use MLlib and similar mixed contexts (see Calling Java/Scala function from a task). To be fair some parts of the PySpark API, like mllib.linalg, provides a more comprehensive set of methods than Scala.
