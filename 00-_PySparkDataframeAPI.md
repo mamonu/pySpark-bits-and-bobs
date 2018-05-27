@@ -1,29 +1,40 @@
 
 ### Dataframes in PySpark
 
+
+
 In Apache Spark, a DataFrame is a distributed collection of rows under named columns. 
 
-In simple terms, it is same as a table in relational database or an Excel sheet with Column headers. 
+In simple terms, they are similar to a table in relational database or an Excel sheet with Column headers. 
 
-It also shares some common characteristics with RDD:
+Dataframes also share some common characteristics with RDDs:
 
-* Immutable in nature : We can create DataFrame / RDD once but can’t change it. And we can transform a DataFrame / RDD after applying transformations.
+* Immutable in nature : We can create a DataFrame / RDD once but can’t change it. And we can transform a DataFrame / RDD after applying transformations.
 
 * Lazy Evaluations:   Which means that a task is not executed until an action is performed.
 
 * Distributed: RDD and DataFrames are both distributed in nature.
 
+---------
+
 #### Why DataFrames are Useful ?
+
+
 
 DataFrames are designed for processing large collection of structured or semi-structured data.
 Observations in Spark DataFrame are organised under named columns, which helps Apache Spark to understand the schema 
 of a  DataFrame. This helps Spark optimize execution plan on these queries.
 DataFrames in Apache Spark have the ability to handle petabytes of data.
 
-#### DataFrames has a support for wide range of data format and sources.
+---------
+
+#### DataFrames support a wide range of data format and sources.
 
 
 ![dfcreate](Pyspark_DFCreate.png)
+
+
+---------
 
 
 #### Important classes of Spark SQL and DataFrames:
