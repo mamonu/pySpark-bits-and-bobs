@@ -20,9 +20,11 @@ Observations in Spark DataFrame are organised under named columns, which helps A
 of a  DataFrame. This helps Spark optimize execution plan on these queries.
 DataFrames in Apache Spark have the ability to handle petabytes of data.
 
-DataFrames has a support for wide range of data format and sources.
+#### DataFrames has a support for wide range of data format and sources.
 
-It has API support for different languages like Python, R, Scala, Java.
+
+![dfcreate](Pyspark_DFCreate.png)
+
 
 #### Important classes of Spark SQL and DataFrames:
 
