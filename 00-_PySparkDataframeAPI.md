@@ -19,12 +19,13 @@ Dataframes also share some common characteristics with RDDs:
 
 #### Why DataFrames are Useful ?
 
+- higher level of abstraction (more user friendly API than RDD API)
 
+- DataFrames are designed for processing large collection of structured or semi-structured data.(DataFrames in Apache Spark have the ability to handle petabytes of data)
 
-DataFrames are designed for processing large collection of structured or semi-structured data.
-Observations in Spark DataFrame are organised under named columns, which helps Apache Spark to understand the schema 
+- Observations in Spark DataFrames are organised under named columns, which helps Apache Spark to understand the schema 
 of a  DataFrame. This helps Spark optimize execution plan on these queries.
-DataFrames in Apache Spark have the ability to handle petabytes of data.
+
 
 ---------
 
