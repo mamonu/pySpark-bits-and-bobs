@@ -12,7 +12,7 @@ https://spark.apache.org/docs/2.2.0/configuration.html
 ONS runs spark on Yarn, that entails another set of configuration options documented here:
 https://spark.apache.org/docs/2.2.0/running-on-yarn.html
 
-
+created by: Phil Lee
 
 
 """
@@ -29,11 +29,11 @@ spark = (
     .config('spark.dynamicAllocation.maxExecutors', 3)  # Limit the amount of resources requested, value to set depends on current system load and which Yarn queue is being used
     .config('spark.dynamicAllocation.enabled', 'true')  # Spark will request resources as needed, should already be 'true' in CDSW
     .config('spark.shuffle.service.enabled', 'true')  # Part of dynamic allocation set up, should already be 'true' in CDSW
-    # .enableHiveSupport()  # Uncomment this line if reading from Hive
+    .enableHiveSupport()  #   if reading from Hive
     .getOrCreate()
   )
   
-# Get all config (including defaults)
+# print all config (including defaults)
 spark.sparkContext.getConf().getAll()
 
 
