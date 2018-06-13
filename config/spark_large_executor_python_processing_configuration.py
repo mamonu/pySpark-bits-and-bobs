@@ -14,7 +14,7 @@ https://spark.apache.org/docs/2.2.0/configuration.html
 ONS runs spark on Yarn, that entails another set of configuration options documented here:
 https://spark.apache.org/docs/2.2.0/running-on-yarn.html
 
-
+created by: Phil Lee
 """
 
 # SparkSession manages the connection to the SparkCluster
