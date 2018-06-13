@@ -13,6 +13,7 @@ ONS runs spark on Yarn, that entails another set of configuration options docume
 https://spark.apache.org/docs/2.2.0/running-on-yarn.html
 
 created by: Phil Lee
+edited by: Theodore Manassis
 
 
 """
@@ -20,7 +21,7 @@ created by: Phil Lee
 # SparkSession manages the connection to the SparkCluster
 from pyspark.sql import SparkSession
 
-# Config for large Spark Executors (high RAM and multiple cores)
+# Config for large Spark Executors (limited RAM and multiple cores)
 spark = (
   SparkSession.builder.appName('example_config')
     .config('spark.executor.memory', '5g')  # Sets the memory available for the Spark JVM part of the Spark Executor Container
