@@ -12,7 +12,7 @@ import numpy as np
 # Create Spark Session
 spark = SparkSession \
     .builder \
-    .appName("PySpark_Tutorial_02") \
+    .appName("PySpark_Tutorial_05") \
     .getOrCreate()      
     
     
