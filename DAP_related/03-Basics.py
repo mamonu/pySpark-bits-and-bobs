@@ -74,7 +74,3 @@ df_sample_data.show()
 # End our Spark Session - always do this at the end 
 spark.stop()
 
-
-# ----------------------------------------- #
-# -----------End of Tutorial 00 ----------- #
-# ----------------------------------------- #
