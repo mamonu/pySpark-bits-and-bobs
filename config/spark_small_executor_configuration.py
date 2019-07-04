@@ -21,7 +21,6 @@ edited by: Theodore Manassis
 # SparkSession manages the connection to the SparkCluster
 from pyspark.sql import SparkSession
 
-# Config for large Spark Executors (limited RAM and multiple cores)
 spark = (
   SparkSession.builder.appName('example_config')
     .config('spark.executor.memory', '5g')  # Sets the memory available for the Spark JVM part of the Spark Executor Container
